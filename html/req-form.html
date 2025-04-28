@@ -1,0 +1,1016 @@
+<!doctype html>
+
+<html
+  lang="en"
+  class="layout-menu-fixed layout-compact"
+  data-assets-path="../assets/"
+  data-template="vertical-menu-template-free"
+  data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>ITSM Demo</title>
+
+    <meta name="description" content="" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet" />
+
+    <link rel="stylesheet" href="../assets/vendor/fonts/iconify-icons.css" />
+
+    <!-- Core CSS -->
+    <!-- build:css assets/vendor/css/theme.css  -->
+
+    <link rel="stylesheet" href="../dist/css/style1.css" />
+    <link rel="stylesheet" href="../dist/css/style3.css" />
+    <link rel="stylesheet" href="../assets/vendor/css/core.css" />
+    <link rel="stylesheet" href="../assets/css/demo.css" />
+
+    <!-- Vendors CSS -->
+
+    <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+
+    <!-- endbuild -->
+
+    <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" />
+
+    <!-- Page CSS -->
+
+    <!-- Helpers -->
+    <script src="../assets/vendor/js/helpers.js"></script>
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+
+    <script src="../assets/js/config.js"></script>
+    <style>
+      .congratulation-card {
+        position: relative;
+        overflow: hidden;
+        border: none;
+      }
+      
+      .congratulation-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, 
+         rgb(21, 25, 40) 20%, 
+         rgba(38, 46, 73, 0.938) 50%,
+         rgba(88, 91, 124, 0.2) 90%, 
+         rgba(255, 255, 255, 0) 100%),
+         url('../assets/img/my/lori.png') no-repeat bottom left 110px;
+        background-size: cover;
+        z-index: 1;
+      }
+      
+      .text-content {
+        position: relative;
+        z-index: 2;
+        padding: 2rem;
+      }
+      
+      .image-content {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      .badge-image {
+        max-height: 175px;
+        object-fit: contain;
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+      }
+      
+      .btn-light {
+        background-color: white;
+        color: #4a6dff;
+        border: none;
+        transition: all 0.3s ease;
+      }
+      
+      .btn-light:hover {
+        background-color: #f8f9fa;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      
+      /* 响应式调整 */
+      @media (max-width: 768px) {
+        .congratulation-card::before {
+          background: linear-gradient(180deg, 
+                      rgba(74, 109, 255, 0.8) 0%, 
+                      transparent 100%),
+                      url('../assets/img/my/lori.png') no-repeat center bottom;
+        }
+        
+        .image-content {
+          padding-top: 0;
+        }
+        
+        .badge-image {
+          max-height: 150px;
+        }
+      }
+
+      /* Product Image Styles */
+      .inc-cre-product-image-container {
+        margin-bottom: 1.25rem;
+        border-radius: 0.375rem;
+        overflow: hidden;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+        max-width: 100%;
+        height: auto;
+      }
+      
+      .inc-cre-product-image-wrapper {
+        position: relative;
+        width: 100%;
+        height: 0;
+        padding-bottom: 25%; /* Reduced height for rectangular images */
+        overflow: hidden;
+        background-color: #121212;
+      }
+      
+      .inc-cre-product-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain; /* Changed from cover to contain */
+        transition: transform 0.5s ease;
+        background-color: #121212;
+      }
+      
+      .inc-cre-product-image-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%);
+        padding: 0.75rem 1.25rem;
+        color: white;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      }
+      
+      .inc-cre-product-title {
+        margin: 0 0 0.25rem 0;
+        font-weight: 600;
+        font-size: 1rem;
+      }
+      
+      .inc-cre-product-description {
+        margin: 0;
+        opacity: 0.9;
+        font-size: 0.75rem;
+      }
+      
+      .inc-cre-product-image-wrapper:hover .inc-cre-product-image {
+        transform: scale(1.03);
+      }
+      
+      /* Add support for square images */
+      .inc-cre-product-image-wrapper.square {
+        padding-bottom: 25%; /* Keep same height for consistency */
+      }
+      
+      /* Auto-detect and adjust for different image types */
+      .inc-cre-product-image.landscape {
+        object-position: center;
+      }
+      
+      .inc-cre-product-image.portrait {
+        object-position: center;
+      }
+      
+      @media (max-width: 768px) {
+        .inc-cre-product-image-wrapper {
+          padding-bottom: 35%; /* Slightly taller on mobile but still compact */
+        }
+        
+        .inc-cre-product-image-wrapper.square {
+          padding-bottom: 35%;
+        }
+      }
+      </style>
+  </head>
+
+  <body>
+
+    <!-- Phone Menu -->
+    <div class="modal-overlay" id="menuModal">
+      <div class="game-container">
+          <div class="close-button" id="closeButton"></div>
+          <div class="status-bar">
+              <div class="level-info">UID: A571</div>
+          </div>
+          
+          <div class="game-screen">
+              <div class="icon-grid">
+                  <!-- Row 1 -->
+                  <div class="game-icon">
+                      <i class="icon-image menu-icon tf-icons bx bx-home-smile"></i>
+                      <div class="icon-name">Dashboard</div>
+                  </div>
+                  <div class="game-icon">
+                      <i class="icon-image fa-solid fa-ban"></i>
+                      <div class="icon-name">Blacklist</div>
+                  </div>
+                  <div class="game-icon wide-icon">
+                      <i class="icon-image fa-solid fa-user-shield"></i>
+                      <div class="icon-name">Profile</div>
+                  </div>
+                  
+                  <!-- Row 2 -->
+                  <div class="game-icon">
+                      <i class="icon-image fa-solid fa-triangle-exclamation"></i>
+                      <div class="icon-name">Incident</div>
+                  </div>
+                  <div class="game-icon">
+                      <i class="icon-image fa-solid fa-paper-plane"></i>
+                      <div class="icon-name">Request</div>
+                  </div>
+                  <div class="game-icon wide-icon">
+                      <i class="icon-image fa-solid fa-comment-dots"></i>
+                      <div class="icon-name">Feedback</div>
+                  </div>
+                  
+                  <!-- Row 3 -->
+                  <div class="game-icon">
+                      <i class="icon-image fa-solid fa-plus-circle"></i>
+                      <div class="icon-name">New Incident</div>
+                  </div>
+                  <div class="game-icon">
+                      <i class="icon-image fa-solid fa-file-circle-plus"></i>
+                      <div class="icon-name">New Request</div>
+                  </div>
+                  <div class="game-icon">
+                      <i class="icon-image fa-solid fa-user"></i>
+                      <div class="icon-name">Personal</div>
+                  </div>
+                  <div class="game-icon">
+                      <i class="icon-image fa-solid fa-list-check"></i>
+                      <div class="icon-name">Todo</div>
+                  </div>
+                  
+                  <!-- Row 4 -->
+                  <div class="game-icon wide-icon">
+                      <i class="icon-image fa-solid fa-book"></i>
+                      <div class="icon-name">Knowledge</div>
+                  </div>
+                  <div class="game-icon wide-icon">
+                      <div class="notification">1</div>
+                      <i class="icon-image fa-solid fa-bell"></i>
+                      <div class="icon-name">Announcement</div>
+                  </div>
+                  
+                  <!-- Row 5 -->
+                  <div class="game-icon wide-icon">
+                      <i class="icon-image fa-solid fa-circle-info"></i>
+                      <div class="icon-name">About ITSM</div>
+                  </div>
+                  <div class="game-icon">
+                      <i class="icon-image fa-solid fa-question-circle"></i>
+                      <div class="icon-name">FAQ</div>
+                  </div>
+                  <div class="game-icon">
+                      <i class="icon-image fa-solid fa-lightbulb"></i>
+                      <div class="icon-name">Version</div>
+                  </div>
+                  
+                  <!-- Row 6 (bottom row) -->
+                  <div class="game-icon">
+                      <i class="icon-image fa-solid fa-gears"></i>
+                      <div class="icon-name">Setting</div>
+                  </div>
+                  <div class="game-icon">
+                      <i class="icon-image fa-solid fa-power-off"></i>
+                      <div class="icon-name">Log Out</div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+          <div class="app-brand demo">
+            <a href="index.html" class="app-brand-link">
+              <span class="app-brand-logo demo">
+                <span class="text-primary">
+                  <img class="logo_hs" src="../assets/img/logo/hs_logo.png">
+                </span>
+              </span>
+              <span class="app-brand-text demo menu-text fw-bold ms-2">HSG ITSM</span>
+            </a>
+
+            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+              <i class="bx bx-chevron-left d-block d-xl-none align-middle"></i>
+            </a>
+          </div>
+
+          <div class="menu-divider mt-0"></div>
+
+          <div class="menu-inner-shadow"></div>
+
+          <ul class="menu-inner py-1">
+            <!-- Dashboards -->
+            <li class="menu-item active open">
+              <a href="index.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-smile"></i>
+                <div class="text-truncate" data-i18n="Dashboards">Dashboards</div>
+              </a>
+            </li>
+
+            <!-- Layouts -->
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-layout"></i>
+                <div class="text-truncate" data-i18n="Layouts">Personal</div>
+              </a>
+
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="./personal-home.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Without menu">Home</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="layouts-without-navbar.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Without navbar">All Todo</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="layouts-fluid.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Fluid">Incidents</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="layouts-container.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Container">Requests</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="layouts-blank.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Blank">My Feedback</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Apps & Pages -->
+            <li class="menu-header small text-uppercase">
+              <span class="menu-header-text">EVENTS &amp; REQUEST</span>
+            </li>
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                <div class="text-truncate" data-i18n="Account Settings">Incidents</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="pages-account-settings-connections.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Connections">All</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="pages-account-settings-account.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Account">Create New</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="pages-account-settings-notifications.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Notifications">Assigned to me</div>
+                  </a>
+                </li>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                <div class="text-truncate" data-i18n="Account Settings">Requests</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="pages-account-settings-connections.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Connections">All</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="service-catalog.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Connections">Service Catalog</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="pages-account-settings-account.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Account">Create New</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="pages-account-settings-notifications.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Notifications">Assigned to us</div>
+                  </a>
+                </li>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Components -->
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li>
+            <!-- User interface -->
+            <li class="menu-item">
+              <a href="javascript:void(0)" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-box"></i>
+                <div class="text-truncate" data-i18n="User interface">Knowledge</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="ui-accordion.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Accordion">Homepage</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="ui-alerts.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Alerts">Create New</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="ui-badges.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Badges">Import Articles</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Extended components -->
+            <li class="menu-item">
+              <a href="javascript:void(0)" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-copy"></i>
+                <div class="text-truncate" data-i18n="Extended UI">Feedback</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="extended-ui-perfect-scrollbar.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Perfect Scrollbar">All</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="extended-ui-text-divider.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Text Divider">Create New</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="menu-item">
+              <a href="javascript:void(0)" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-copy"></i>
+                <div class="text-truncate" data-i18n="Extended UI">Announcement</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="extended-ui-perfect-scrollbar.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Perfect Scrollbar">All</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="extended-ui-text-divider.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Text Divider">Create New</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Forms & Tables -->
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">Forms &amp; Tables</span></li>
+            <!-- Forms -->
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+                <div class="text-truncate" data-i18n="Authentications">Authentications</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="auth-login-basic.html" class="menu-link" target="_blank">
+                    <div class="text-truncate" data-i18n="Basic">Login</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="auth-register-basic.html" class="menu-link" target="_blank">
+                    <div class="text-truncate" data-i18n="Basic">Register</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="auth-forgot-password-basic.html" class="menu-link" target="_blank">
+                    <div class="text-truncate" data-i18n="Basic">Forgot Password</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </aside>
+        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+
+          <div class="inc-cre-container">
+            <header class="inc-cre-header">
+                <div class="inc-cre-header-left">
+                    <button class="inc-cre-menu-button">
+                      <i class="fa-solid fa-plus"></i> 
+                    </button>
+                    <div class="inc-cre-title-group">
+                        <div class="inc-cre-title">Request Form</div>
+                        <div class="inc-cre-subtitle">New record</div>
+                    </div>
+                </div>
+                <div class="inc-cre-header-right">
+                    <button class="inc-cre-btn inc-cre-btn-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 20h9"></path>
+                            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                        </svg>
+                    </button>
+                    <button class="inc-cre-btn inc-cre-btn-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="4" y1="6" x2="20" y2="6"></line>
+                            <line x1="4" y1="12" x2="20" y2="12"></line>
+                            <line x1="4" y1="18" x2="20" y2="18"></line>
+                        </svg>
+                    </button>
+                    <button class="inc-cre-btn inc-cre-btn-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="1"></circle>
+                            <circle cx="12" cy="5" r="1"></circle>
+                            <circle cx="12" cy="19" r="1"></circle>
+                        </svg>
+                    </button>
+                    <button class="inc-cre-btn inc-cre-btn-submit">Submit</button>
+                    <!-- <button class="inc-cre-btn inc-cre-btn-resolve">Resolve</button> -->
+                </div>
+            </header>
+        
+            <main class="inc-cre-form-wrapper">
+                <form id="incidentForm" class="inc-cre-incident-form">
+                    <!-- Product Image Section -->
+                    <div class="inc-cre-product-image-container">
+                        <div class="inc-cre-product-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" 
+                                 alt="Selected Product" 
+                                 class="inc-cre-product-image">
+                            <div class="inc-cre-product-image-overlay">
+                                <h4 class="inc-cre-product-title">Modern Furniture Selection</h4>
+                                <p class="inc-cre-product-description">Office desk with minimalist design</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="inc-cre-form-grid">
+                        <div class="inc-cre-form-column">
+                            <div class="inc-cre-form-group">
+                                <label for="number" class="inc-cre-form-label">Number</label>
+                                <input type="text" id="number" class="inc-cre-form-control" value="INC0010005" readonly>
+                            </div>
+        
+                            <div class="inc-cre-form-group">
+                                <label for="caller" class="inc-cre-form-label inc-cre-required">Caller</label>
+                                <div class="inc-cre-input-with-icon">
+                                    <input type="text" id="caller" class="inc-cre-form-control" required>
+                                    <button type="button" class="inc-cre-icon-search">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="11" cy="11" r="8"></circle>
+                                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+        
+                            <div class="inc-cre-form-group">
+                                <label for="category" class="inc-cre-form-label">Category</label>
+                                <select id="category" class="inc-cre-form-control">
+                                    <option>-- None --</option>
+                                    <option selected>Inquiry / Help</option>
+                                    <option>Software</option>
+                                    <option>Hardware</option>
+                                    <option>Network</option>
+                                </select>
+                            </div>
+        
+                            <div class="inc-cre-form-group">
+                                <label for="subcategory" class="inc-cre-form-label">Subcategory</label>
+                                <select id="subcategory" class="inc-cre-form-control">
+                                    <option selected>-- None --</option>
+                                </select>
+                            </div>
+        
+                            <div class="inc-cre-form-group">
+                                <label for="service" class="inc-cre-form-label">Service</label>
+                                <div class="inc-cre-input-with-icon">
+                                    <input type="text" id="service" class="inc-cre-form-control">
+                                    <button type="button" class="inc-cre-icon-search">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="11" cy="11" r="8"></circle>
+                                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+        
+                            <div class="inc-cre-form-group">
+                                <label for="service-offering" class="inc-cre-form-label">Service offering</label>
+                                <div class="inc-cre-input-with-icon">
+                                    <input type="text" id="service-offering" class="inc-cre-form-control">
+                                    <button type="button" class="inc-cre-icon-search">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="11" cy="11" r="8"></circle>
+                                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+        
+                            <div class="inc-cre-form-group">
+                                <label for="config-item" class="inc-cre-form-label">Configuration item</label>
+                                <div class="inc-cre-input-with-icon">
+                                    <input type="text" id="config-item" class="inc-cre-form-control">
+                                    <button type="button" class="inc-cre-icon-search">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="11" cy="11" r="8"></circle>
+                                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class="inc-cre-form-column">
+                            <div class="inc-cre-form-group">
+                                <label for="channel" class="inc-cre-form-label">Channel</label>
+                                <select id="channel" class="inc-cre-form-control">
+                                    <option selected>-- None --</option>
+                                    <option>Email</option>
+                                    <option>Phone</option>
+                                    <option>Web</option>
+                                </select>
+                            </div>
+        
+                            <div class="inc-cre-form-group">
+                                <label for="state" class="inc-cre-form-label">State</label>
+                                <select id="state" class="inc-cre-form-control">
+                                    <option selected>New</option>
+                                    <option>In Progress</option>
+                                    <option>On Hold</option>
+                                    <option>Resolved</option>
+                                    <option>Closed</option>
+                                </select>
+                            </div>
+        
+                            <div class="inc-cre-form-group">
+                                <label for="impact" class="inc-cre-form-label">Impact</label>
+                                <select id="impact" class="inc-cre-form-control">
+                                    <option>1 - High</option>
+                                    <option>2 - Medium</option>
+                                    <option selected>3 - Low</option>
+                                </select>
+                            </div>
+        
+                            <div class="inc-cre-form-group">
+                                <label for="urgency" class="inc-cre-form-label">Urgency</label>
+                                <select id="urgency" class="inc-cre-form-control">
+                                    <option>1 - High</option>
+                                    <option>2 - Medium</option>
+                                    <option selected>3 - Low</option>
+                                </select>
+                            </div>
+        
+                            <div class="inc-cre-form-group">
+                                <label for="priority" class="inc-cre-form-label">Priority</label>
+                                <div class="inc-cre-priority-display">
+                                    <span id="priority-value" class="inc-cre-priority-value">5 - Planning</span>
+                                    <svg class="inc-cre-info-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                    </svg>
+                                </div>
+                            </div>
+        
+                            <div class="inc-cre-form-group">
+                                <label for="assignment-group" class="inc-cre-form-label">Assignment group</label>
+                                <div class="inc-cre-input-with-icon">
+                                    <input type="text" id="assignment-group" class="inc-cre-form-control">
+                                    <button type="button" class="inc-cre-icon-search">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="11" cy="11" r="8"></circle>
+                                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+        
+                            <div class="inc-cre-form-group">
+                                <label for="assigned-to" class="inc-cre-form-label">Assigned to</label>
+                                <div class="inc-cre-input-with-icon">
+                                    <input type="text" id="assigned-to" class="inc-cre-form-control">
+                                    <button type="button" class="inc-cre-icon-search">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="11" cy="11" r="8"></circle>
+                                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="inc-cre-form-group inc-cre-short-description-group">
+                        <label for="short-description" class="inc-cre-form-label inc-cre-required">Short description</label>
+                        <div class="inc-cre-input-with-actions">
+                            <input type="text" id="short-description" class="inc-cre-form-control" required>
+                            <div class="inc-cre-action-buttons">
+                                <button type="button" class="inc-cre-btn-help">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                                    </svg>
+                                </button>
+                                <button type="button" class="inc-cre-btn-help">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="4" y1="6" x2="20" y2="6"></line>
+                                        <line x1="4" y1="12" x2="20" y2="12"></line>
+                                        <line x1="4" y1="18" x2="20" y2="18"></line>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="inc-cre-form-group inc-cre-full-width">
+                        <label for="description" class="inc-cre-form-label">Description</label>
+                        <textarea id="description" class="inc-cre-form-control inc-cre-description-textarea" rows="5"></textarea>
+                    </div>
+                </form>
+            </main>
+        
+            <div class="inc-cre-related-search-container">
+                <button class="inc-cre-btn inc-cre-btn-related-search">
+                    Related Search Results
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </button>
+            </div>
+        
+            <div class="inc-cre-tab-section">
+                <div class="inc-cre-tabs">
+                    <button class="inc-cre-tab active">Notes</button>
+                    <button class="inc-cre-tab">Related Records</button>
+                    <button class="inc-cre-tab">Resolution Information</button>
+                </div>
+        
+                <div class="inc-cre-tab-content">
+                    <div id="notes-tab" class="inc-cre-tab-pane active">
+                        <div class="inc-cre-watch-list">
+                            <span>Watch list</span>
+                            <div class="inc-cre-list-actions">
+                                <button class="inc-cre-icon-button">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg>
+                                </button>
+                                <button class="inc-cre-icon-button">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="9" cy="7" r="4"></circle>
+                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <textarea class="inc-cre-notes-textarea"></textarea>
+        
+                        <div class="inc-cre-work-notes-list">
+                            <span>Work notes list</span>
+                            <div class="inc-cre-list-actions">
+                                <button class="inc-cre-icon-button">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg>
+                                </button>
+                                <button class="inc-cre-icon-button">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="9" cy="7" r="4"></circle>
+                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+        
+                        <div class="inc-cre-notes-group">
+                            <label for="additional-comments">Additional comments</label>
+                            <textarea id="additional-comments" class="inc-cre-notes-textarea"></textarea>
+                        </div>
+        
+                        <div class="inc-cre-notes-group">
+                            <label for="work-notes">Work notes</label>
+                            <textarea id="work-notes" class="inc-cre-notes-textarea inc-cre-work-notes-textarea"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <footer class="inc-cre-form-footer">
+                <div class="inc-cre-footer-buttons">
+                    <button type="button" class="inc-cre-btn inc-cre-btn-submit-footer">Submit</button>
+                    <!-- <button type="button" class="inc-cre-btn inc-cre-btn-resolve-footer">Resolve</button> -->
+                </div>
+            </footer>
+        </div>
+        
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    <div class="buy-now">
+      <a
+        href="#"
+        class="btn btn-danger btn-buy-now"
+        >Testing Version</a
+      >
+    </div>
+
+    <!-- Core JS -->
+
+    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
+
+    <script src="../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../assets/vendor/js/bootstrap.js"></script>
+
+    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+
+    <script src="../assets/vendor/js/menu.js"></script>
+
+    <!-- endbuild -->
+
+    <!-- Vendors JS -->
+    <script src="../assets/vendor/libs/apex-charts/apexcharts.js"></script>
+
+    <!-- Main JS -->
+
+    <script src="../assets/js/main.js"></script>
+
+    <!-- Page JS -->
+    <script src="../assets/js/dashboards-analytics.js"></script>
+
+    <!-- Place this tag before closing body tag for github widget button. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script src="../dist/css/style1.js"></script>
+    <script src="../dist/css/style3.js"></script>
+     <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const openButton = document.querySelector('.open-button');
+        const closeButton = document.getElementById('closeButton');
+        const modal = document.getElementById('menuModal');
+        const gameIcons = document.querySelectorAll('.game-icon');
+        const body = document.body;
+
+        // Product image aspect ratio handler
+        const productImage = document.querySelector('.inc-cre-product-image');
+        const imageWrapper = document.querySelector('.inc-cre-product-image-wrapper');
+        
+        if (productImage) {
+          productImage.onload = function() {
+            const width = this.naturalWidth;
+            const height = this.naturalHeight;
+            const ratio = width / height;
+            
+            // Remove any existing classes
+            this.classList.remove('landscape', 'portrait', 'square');
+            imageWrapper.classList.remove('square');
+            
+            // Add appropriate class based on aspect ratio
+            if (ratio > 1.2) {
+              // Landscape image (wider than tall)
+              this.classList.add('landscape');
+            } else if (ratio < 0.8) {
+              // Portrait image (taller than wide)
+              this.classList.add('portrait');
+            } else {
+              // Square or nearly square image
+              this.classList.add('square');
+              imageWrapper.classList.add('square');
+            }
+          };
+          
+          // Trigger for images that might already be cached
+          if (productImage.complete) {
+            productImage.onload();
+          }
+        }
+
+        // Open modal when the open button is clicked
+        openButton.addEventListener('click', function() {
+            modal.classList.add('active_open_menu');
+            body.classList.add('menu-open');
+
+            // Add animation delay to make it feel more polished
+            setTimeout(() => {
+                modal.style.transition = 'opacity 0.3s ease';
+            }, 500);
+        });
+      
+        // Close modal when the close button is clicked
+        closeButton.addEventListener('click', function() {
+            closeMenu();
+        });
+      
+        // Close modal when clicking outside the game container
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeMenu();
+            }
+        });
+      
+        // Function to close menu with animation
+        function closeMenu() {
+            // First slide out the container
+            const container = modal.querySelector('.game-container');
+            container.style.transform = 'translateX(100%)';
+
+            // Then fade out the overlay
+            setTimeout(() => {
+                modal.classList.remove('active_open_menu');
+                body.classList.remove('menu-open');
+
+                // Reset transform after animation completes
+                setTimeout(() => {
+                    container.style.transform = '';
+                }, 300);
+            }, 300);
+        }
+      
+        // Add click effect to game icons
+        gameIcons.forEach(icon => {
+            icon.addEventListener('click', function() {
+                // Remove active class from all icons
+                gameIcons.forEach(i => i.classList.remove('active_open_menu'));
+
+                // Add active class to clicked icon
+                this.classList.add('active_open_menu');
+
+                // Add a subtle press animation
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            });
+        });
+
+        // Add keyboard support (Escape key to close)
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('active_open_menu')) {
+                closeMenu();
+            }
+        });
+      });
+     </script>
+  </body>
+</html>

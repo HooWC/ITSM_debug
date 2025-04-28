@@ -1,0 +1,888 @@
+<!doctype html>
+
+<html
+  lang="en"
+  class="layout-menu-fixed layout-compact"
+  data-assets-path="../assets/"
+  data-template="vertical-menu-template-free"
+  data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>ITSM Demo</title>
+
+    <meta name="description" content="" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet" />
+
+    <link rel="stylesheet" href="../assets/vendor/fonts/iconify-icons.css" />
+
+    <!-- Core CSS -->
+    <!-- build:css assets/vendor/css/theme.css  -->
+
+    <link rel="stylesheet" href="../dist/css/style1.css" />
+    <link rel="stylesheet" href="../dist/css/style2.css" />
+    <link rel="stylesheet" href="../assets/vendor/css/core.css" />
+    <link rel="stylesheet" href="../assets/css/demo.css" />
+
+    <!-- Vendors CSS -->
+
+    <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+
+    <!-- endbuild -->
+
+    <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" />
+
+    <!-- Page CSS -->
+
+    <!-- Helpers -->
+    <script src="../assets/vendor/js/helpers.js"></script>
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+
+    <script src="../assets/js/config.js"></script>
+    <style>
+      .congratulation-card {
+        position: relative;
+        overflow: hidden;
+        border: none;
+      }
+      
+      .congratulation-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, 
+         rgb(21, 25, 40) 20%, 
+         rgba(38, 46, 73, 0.938) 50%,
+         rgba(88, 91, 124, 0.2) 90%, 
+         rgba(255, 255, 255, 0) 100%),
+         url('../assets/img/my/lori.png') no-repeat bottom left 110px;
+        background-size: cover;
+        z-index: 1;
+      }
+      
+      .text-content {
+        position: relative;
+        z-index: 2;
+        padding: 2rem;
+      }
+      
+      .image-content {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      .badge-image {
+        max-height: 175px;
+        object-fit: contain;
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+      }
+      
+      .btn-light {
+        background-color: white;
+        color: #4a6dff;
+        border: none;
+        transition: all 0.3s ease;
+      }
+      
+      .btn-light:hover {
+        background-color: #f8f9fa;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .open-button{
+        list-style-type: none;
+      }
+      
+      /* 响应式调整 */
+      @media (max-width: 768px) {
+        .congratulation-card::before {
+          background: linear-gradient(180deg, 
+                      rgba(74, 109, 255, 0.8) 0%, 
+                      transparent 100%),
+                      url('../assets/img/my/lori.png') no-repeat center bottom;
+        }
+        
+        .image-content {
+          padding-top: 0;
+        }
+        
+        .badge-image {
+          max-height: 150px;
+        }
+      }
+      </style>
+  </head>
+
+  <body>
+
+    <!-- Phone Menu -->
+    <div class="modal-overlay" id="menuModal">
+      <div class="game-container">
+          <div class="close-button" id="closeButton"></div>
+          <div class="status-bar">
+              <div class="level-info">UID: A571</div>
+          </div>
+          
+          <div class="game-screen">
+              <div class="icon-grid">
+                  <!-- Row 1 -->
+                  <div class="game-icon">
+                      <i class="icon-image menu-icon tf-icons bx bx-home-smile"></i>
+                      <div class="icon-name">Dashboard</div>
+                  </div>
+                  <div class="game-icon">
+                      <i class="icon-image fa-solid fa-ban"></i>
+                      <div class="icon-name">Blacklist</div>
+                  </div>
+                  <div class="game-icon wide-icon">
+                      <i class="icon-image fa-solid fa-user-shield"></i>
+                      <div class="icon-name">Profile</div>
+                  </div>
+                  
+                  <!-- Row 2 -->
+                  <div class="game-icon">
+                      <i class="icon-image fa-solid fa-triangle-exclamation"></i>
+                      <div class="icon-name">Incident</div>
+                  </div>
+                  <div class="game-icon">
+                      <i class="icon-image fa-solid fa-paper-plane"></i>
+                      <div class="icon-name">Request</div>
+                  </div>
+                  <div class="game-icon wide-icon">
+                      <i class="icon-image fa-solid fa-comment-dots"></i>
+                      <div class="icon-name">Feedback</div>
+                  </div>
+                  
+                  <!-- Row 3 -->
+                  <div class="game-icon">
+                      <i class="icon-image fa-solid fa-plus-circle"></i>
+                      <div class="icon-name">New Incident</div>
+                  </div>
+                  <div class="game-icon">
+                      <i class="icon-image fa-solid fa-file-circle-plus"></i>
+                      <div class="icon-name">New Request</div>
+                  </div>
+                  <div class="game-icon">
+                      <i class="icon-image fa-solid fa-user"></i>
+                      <div class="icon-name">Personal</div>
+                  </div>
+                  <div class="game-icon">
+                      <i class="icon-image fa-solid fa-list-check"></i>
+                      <div class="icon-name">Todo</div>
+                  </div>
+                  
+                  <!-- Row 4 -->
+                  <div class="game-icon wide-icon">
+                      <i class="icon-image fa-solid fa-book"></i>
+                      <div class="icon-name">Knowledge</div>
+                  </div>
+                  <div class="game-icon wide-icon">
+                      <div class="notification">1</div>
+                      <i class="icon-image fa-solid fa-bell"></i>
+                      <div class="icon-name">Announcement</div>
+                  </div>
+                  
+                  <!-- Row 5 -->
+                  <div class="game-icon wide-icon">
+                      <i class="icon-image fa-solid fa-circle-info"></i>
+                      <div class="icon-name">About ITSM</div>
+                  </div>
+                  <div class="game-icon">
+                      <i class="icon-image fa-solid fa-question-circle"></i>
+                      <div class="icon-name">FAQ</div>
+                  </div>
+                  <div class="game-icon">
+                      <i class="icon-image fa-solid fa-lightbulb"></i>
+                      <div class="icon-name">Version</div>
+                  </div>
+                  
+                  <!-- Row 6 (bottom row) -->
+                  <div class="game-icon">
+                      <i class="icon-image fa-solid fa-gears"></i>
+                      <div class="icon-name">Setting</div>
+                  </div>
+                  <div class="game-icon">
+                      <i class="icon-image fa-solid fa-power-off"></i>
+                      <div class="icon-name">Log Out</div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+          <div class="app-brand demo">
+            <a href="index.html" class="app-brand-link">
+              <span class="app-brand-logo demo">
+                <span class="text-primary">
+                  <img class="logo_hs" src="../assets/img/logo/hs_logo.png">
+                </span>
+              </span>
+              <span class="app-brand-text demo menu-text fw-bold ms-2">HSG ITSM</span>
+            </a>
+
+            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+              <i class="bx bx-chevron-left d-block d-xl-none align-middle"></i>
+            </a>
+          </div>
+
+          <div class="menu-divider mt-0"></div>
+
+          <div class="menu-inner-shadow"></div>
+
+          <ul class="menu-inner py-1">
+            <!-- Dashboards -->
+            <li class="menu-item">
+              <a href="index.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-smile"></i>
+                <div class="text-truncate" data-i18n="Dashboards">Dashboards</div>
+              </a>
+            </li>
+
+            <!-- Layouts -->
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-layout"></i>
+                <div class="text-truncate" data-i18n="Layouts">Personal</div>
+              </a>
+
+              <ul class="menu-sub">
+                <li class="menu-item active">
+                  <a href="./personal-home.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Without menu">Home</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="layouts-without-navbar.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Without navbar">All Todo</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="layouts-fluid.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Fluid">Incidents</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="layouts-container.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Container">Requests</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="layouts-blank.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Blank">My Feedback</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Apps & Pages -->
+            <li class="menu-header small text-uppercase">
+              <span class="menu-header-text">EVENTS &amp; REQUEST</span>
+            </li>
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                <div class="text-truncate" data-i18n="Account Settings">Incidents</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="pages-account-settings-connections.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Connections">All</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="pages-account-settings-account.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Account">Create New</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="pages-account-settings-notifications.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Notifications">Assigned to me</div>
+                  </a>
+                </li>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item active open">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                <div class="text-truncate" data-i18n="Account Settings">Requests</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="pages-account-settings-connections.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Connections">All</div>
+                  </a>
+                </li>
+                <li class="menu-item active">
+                  <a href="service-catalog.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Connections">Service Catalog</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="pages-account-settings-account.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Account">Create New</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="pages-account-settings-notifications.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Notifications">Assigned to us</div>
+                  </a>
+                </li>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Components -->
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li>
+            <!-- User interface -->
+            <li class="menu-item">
+              <a href="javascript:void(0)" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-box"></i>
+                <div class="text-truncate" data-i18n="User interface">Knowledge</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="ui-accordion.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Accordion">Homepage</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="ui-alerts.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Alerts">Create New</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="ui-badges.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Badges">Import Articles</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Extended components -->
+            <li class="menu-item">
+              <a href="javascript:void(0)" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-copy"></i>
+                <div class="text-truncate" data-i18n="Extended UI">Feedback</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="extended-ui-perfect-scrollbar.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Perfect Scrollbar">All</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="extended-ui-text-divider.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Text Divider">Create New</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="menu-item">
+              <a href="javascript:void(0)" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-copy"></i>
+                <div class="text-truncate" data-i18n="Extended UI">Announcement</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="extended-ui-perfect-scrollbar.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Perfect Scrollbar">All</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="extended-ui-text-divider.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Text Divider">Create New</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Forms & Tables -->
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">Forms &amp; Tables</span></li>
+            <!-- Forms -->
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+                <div class="text-truncate" data-i18n="Authentications">Authentications</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="auth-login-basic.html" class="menu-link" target="_blank">
+                    <div class="text-truncate" data-i18n="Basic">Login</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="auth-register-basic.html" class="menu-link" target="_blank">
+                    <div class="text-truncate" data-i18n="Basic">Register</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="auth-forgot-password-basic.html" class="menu-link" target="_blank">
+                    <div class="text-truncate" data-i18n="Basic">Forgot Password</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </aside>
+        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+
+          <div class="ser-cat-app-container" style="background-color: #121212; height: 100vh; overflow-y: auto;">
+       
+            <div class="ser-cat-app-content">
+              <div class="ser-cat-app-content-header">
+                <h1 class="ser-cat-app-content-headerText">Service Catalog</h1>
+                <li class="nav-item navbar-dropdown dropdown-user dropdown open-button">
+                  <a
+                    class="nav-link dropdown-toggle hide-arrow p-0"
+                    href="javascript:void(0);"
+                    data-bs-toggle="dropdown">
+                    <div class="avatar avatar-online">
+                      <img src="https://www.diydoutu.com/touxiang/20201222-1.jpg" alt class="w-px-40 h-auto rounded-circle" />
+                    </div>
+                  </a>
+                </li>
+              </div>
+              <div class="ser-cat-app-content-actions">
+                <input class="ser-cat-search-bar" placeholder="Search..." type="text">
+                <div class="ser-cat-app-content-actions-wrapper">
+                  <div class="ser-cat-filter-button-wrapper">
+                    <button class="ser-cat-action-button ser-cat-filter ser-cat-jsFilter"><span>Filter</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg></button>
+                    <div class="ser-cat-filter-menu">
+                      <label>Category</label>
+                      <select>
+                        <option>All Categories</option>
+                        <option>Furniture</option>                     <option>Decoration</option>
+                        <option>Kitchen</option>
+                        <option>Bathroom</option>
+                      </select>
+                      <label>Status</label>
+                      <select>
+                        <option>All Status</option>
+                        <option>Active</option>
+                        <option>Disabled</option>
+                      </select>
+                      <div class="ser-cat-filter-menu-buttons">
+                        <button class="ser-cat-filter-button ser-cat-reset">
+                          Reset
+                        </button>
+                        <button class="ser-cat-filter-button ser-cat-apply">
+                          Apply
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="ser-cat-action-button ser-cat-list ser-cat-active" title="List View">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                  </button>
+                  <button class="ser-cat-action-button ser-cat-grid" title="Grid View">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                  </button>
+                </div>
+              </div>
+              <div class="ser-cat-products-area-wrapper ser-cat-tableView">
+                <div class="ser-cat-products-header">
+                  <div class="ser-cat-product-cell ser-cat-image">
+                    Items
+                    <button class="ser-cat-sort-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+                    </button>
+                  </div>
+                  <div class="ser-cat-product-cell ser-cat-category">Category<button class="ser-cat-sort-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+                    </button></div>
+                  <div class="ser-cat-product-cell ser-cat-status-cell">Status<button class="ser-cat-sort-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+                    </button></div>
+                  <div class="ser-cat-product-cell ser-cat-sales">Sales<button class="ser-cat-sort-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+                    </button></div>
+                  <div class="ser-cat-product-cell ser-cat-stock">Stock<button class="ser-cat-sort-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+                    </button></div>
+                  <div class="ser-cat-product-cell ser-cat-price">Price<button class="ser-cat-sort-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+                    </button></div>
+                </div>
+                <div class="ser-cat-products-row">
+                  <button class="ser-cat-cell-more-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                  </button>
+                    <div class="ser-cat-product-cell ser-cat-image">
+                      <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="product">
+                      <span>Ocean</span>
+                    </div>
+                  <div class="ser-cat-product-cell ser-cat-category"><span class="ser-cat-cell-label">Category:</span>Furniture</div>
+                  <div class="ser-cat-product-cell ser-cat-status-cell">
+                    <span class="ser-cat-cell-label">Status:</span>
+                    <span class="ser-cat-status ser-cat-active">Active</span>
+                  </div>
+                  <div class="ser-cat-product-cell ser-cat-sales"><span class="ser-cat-cell-label">Sales:</span>11</div>
+                  <div class="ser-cat-product-cell ser-cat-stock"><span class="ser-cat-cell-label">Stock:</span>36</div>
+                  <div class="ser-cat-product-cell ser-cat-price"><span class="ser-cat-cell-label">Price:</span>$560</div>
+                </div>
+                <div class="ser-cat-products-row">
+                  <button class="ser-cat-cell-more-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                  </button>
+                    <div class="ser-cat-product-cell ser-cat-image">
+                      <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8a2l0Y2hlbnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="product">
+                      <span>Lou</span>
+                    </div>
+                  <div class="ser-cat-product-cell ser-cat-category"><span class="ser-cat-cell-label">Category:</span>Kitchen</div>
+                  <div class="ser-cat-product-cell ser-cat-status-cell">
+                    <span class="ser-cat-cell-label">Status:</span>
+                    <span class="ser-cat-status ser-cat-disabled">Disabled</span>
+                  </div>
+                  <div class="ser-cat-product-cell ser-cat-sales"><span class="ser-cat-cell-label">Sales:</span>6</div>
+                  <div class="ser-cat-product-cell ser-cat-stock"><span class="ser-cat-cell-label">Stock:</span>46</div>
+                  <div class="ser-cat-product-cell ser-cat-price"><span class="ser-cat-cell-label">Price:</span>$710</div>
+                </div>
+                <div class="ser-cat-products-row">
+                  <button class="ser-cat-cell-more-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                  </button>
+                    <div class="ser-cat-product-cell ser-cat-image">
+                      <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60" alt="product">
+                      <span>Yellow</span>
+                    </div>
+                  <div class="ser-cat-product-cell ser-cat-category"><span class="ser-cat-cell-label">Category:</span>Decoration</div>
+                  <div class="ser-cat-product-cell ser-cat-status-cell">
+                    <span class="ser-cat-cell-label">Status:</span>
+                    <span class="ser-cat-status ser-cat-active">Active</span>
+                  </div>
+                  <div class="ser-cat-product-cell ser-cat-sales"><span class="ser-cat-cell-label">Sales:</span>61</div>
+                  <div class="ser-cat-product-cell ser-cat-stock"><span class="ser-cat-cell-label">Stock:</span>56</div>
+                  <div class="ser-cat-product-cell ser-cat-price"><span class="ser-cat-cell-label">Price:</span>$360</div>
+                </div>
+                <div class="ser-cat-products-row">
+                  <button class="ser-cat-cell-more-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                  </button>
+                    <div class="ser-cat-product-cell ser-cat-image">
+                      <img src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8YmVkcm9vbXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="product">
+                      <span>Dreamy</span>
+                    </div>
+                  <div class="ser-cat-product-cell ser-cat-category"><span class="ser-cat-cell-label">Category:</span>Bedroom</div>
+                  <div class="ser-cat-product-cell ser-cat-status-cell">
+                    <span class="ser-cat-cell-label">Status:</span>
+                    <span class="ser-cat-status ser-cat-disabled">Disabled</span>
+                  </div>
+                  <div class="ser-cat-product-cell ser-cat-sales"><span class="ser-cat-cell-label">Sales:</span>41</div>
+                  <div class="ser-cat-product-cell ser-cat-stock"><span class="ser-cat-cell-label">Stock:</span>66</div>
+                  <div class="ser-cat-product-cell ser-cat-price"><span class="ser-cat-cell-label">Price:</span>$260</div>
+                </div>
+                <div class="ser-cat-products-row">
+                  <button class="ser-cat-cell-more-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                  </button>
+                    <div class="ser-cat-product-cell ser-cat-image">
+                      <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8aW50ZXJpb3J8ZW58MHwwfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="product">
+                      <span>Boheme</span>
+                    </div>
+                  <div class="ser-cat-product-cell ser-cat-category"><span class="ser-cat-cell-label">Category:</span>Furniture</div>
+                  <div class="ser-cat-product-cell ser-cat-status-cell">
+                    <span class="ser-cat-cell-label">Status:</span>
+                    <span class="ser-cat-status ser-cat-active">Active</span>
+                  </div>
+                  <div class="ser-cat-product-cell ser-cat-sales"><span class="ser-cat-cell-label">Sales:</span>32</div>
+                  <div class="ser-cat-product-cell ser-cat-stock"><span class="ser-cat-cell-label">Stock:</span>40</div>
+                  <div class="ser-cat-product-cell ser-cat-price"><span class="ser-cat-cell-label">Price:</span>$350</div>
+                </div>
+                <div class="ser-cat-products-row">
+                  <button class="ser-cat-cell-more-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                  </button>
+                    <div class="ser-cat-product-cell ser-cat-image">
+                      <img src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fGludGVyaW9yfGVufDB8MHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="product">
+                      <span>Sky</span>
+                    </div>
+                  <div class="ser-cat-product-cell ser-cat-category"><span class="ser-cat-cell-label">Category:</span>Bathroom</div>
+                  <div class="ser-cat-product-cell ser-cat-status-cell">
+                    <span class="ser-cat-cell-label">Status:</span>
+                    <span class="ser-cat-status ser-cat-disabled">Disabled</span>
+                  </div>
+                  <div class="ser-cat-product-cell ser-cat-sales"><span class="ser-cat-cell-label">Sales:</span>22</div>
+                  <div class="ser-cat-product-cell ser-cat-stock"><span class="ser-cat-cell-label">Stock:</span>44</div>
+                  <div class="ser-cat-product-cell ser-cat-price"><span class="ser-cat-cell-label">Price:</span>$160</div>
+                </div>
+                <div class="ser-cat-products-row">
+                  <button class="ser-cat-cell-more-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                  </button>
+                    <div class="ser-cat-product-cell ser-cat-image">
+                      <img src="https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzB8fGludGVyaW9yfGVufDB8MHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="product">
+                      <span>Midnight</span>
+                    </div>
+                  <div class="ser-cat-product-cell ser-cat-category"><span class="ser-cat-cell-label">Category:</span>Furniture</div>
+                  <div class="ser-cat-product-cell ser-cat-status-cell">
+                    <span class="ser-cat-cell-label">Status:</span>
+                    <span class="ser-cat-status ser-cat-active">Active</span>
+                  </div>
+                  <div class="ser-cat-product-cell ser-cat-sales"><span class="ser-cat-cell-label">Sales:</span>23</div>
+                  <div class="ser-cat-product-cell ser-cat-stock"><span class="ser-cat-cell-label">Stock:</span>45</div>
+                  <div class="ser-cat-product-cell ser-cat-price"><span class="ser-cat-cell-label">Price:</span>$340</div>
+                </div>
+                <div class="ser-cat-products-row">
+                  <button class="ser-cat-cell-more-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                  </button>
+                    <div class="ser-cat-product-cell ser-cat-image">
+                      <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8aW50ZXJpb3J8ZW58MHwwfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="product">
+                      <span>Boheme</span>
+                    </div>
+                  <div class="ser-cat-product-cell ser-cat-category"><span class="ser-cat-cell-label">Category:</span>Furniture</div>
+                  <div class="ser-cat-product-cell ser-cat-status-cell">
+                    <span class="ser-cat-cell-label">Status:</span>
+                    <span class="ser-cat-status ser-cat-active">Active</span>
+                  </div>
+                  <div class="ser-cat-product-cell ser-cat-sales"><span class="ser-cat-cell-label">Sales:</span>32</div>
+                  <div class="ser-cat-product-cell ser-cat-stock"><span class="ser-cat-cell-label">Stock:</span>40</div>
+                  <div class="ser-cat-product-cell ser-cat-price"><span class="ser-cat-cell-label">Price:</span>$350</div>
+                </div>
+                <div class="ser-cat-products-row">
+                  <button class="ser-cat-cell-more-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                  </button>
+                    <div class="ser-cat-product-cell ser-cat-image">
+                      <img src="https://images.unsplash.com/photo-1511389026070-a14ae610a1be?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzR8fGludGVyaW9yfGVufDB8MHwwfHw%3D&auto=format&fit=crop&w=900&q=60" alt="product">
+                      <span>Palm</span>
+                    </div>
+                  <div class="ser-cat-product-cell ser-cat-category"><span class="ser-cat-cell-label">Category:</span>Decoration</div>
+                  <div class="ser-cat-product-cell ser-cat-status-cell">
+                    <span class="ser-cat-cell-label">Status:</span>
+                    <span class="ser-cat-status ser-cat-active">Active</span>
+                  </div>
+                  <div class="ser-cat-product-cell ser-cat-sales"><span class="ser-cat-cell-label">Sales:</span>24</div>
+                  <div class="ser-cat-product-cell ser-cat-stock"><span class="ser-cat-cell-label">Stock:</span>46</div>
+                  <div class="ser-cat-product-cell ser-cat-price"><span class="ser-cat-cell-label">Price:</span>$60</div>
+                </div>
+                <div class="ser-cat-products-row">
+                  <button class="ser-cat-cell-more-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                  </button>
+                    <div class="ser-cat-product-cell ser-cat-image">
+                      <img src="https://images.unsplash.com/photo-1600494603989-9650cf6ddd3d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTV8fGludGVyaW9yfGVufDB8MHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="product">
+                      <span>Forest</span>
+                    </div>
+                  <div class="ser-cat-product-cell ser-cat-category"><span class="ser-cat-cell-label">Category:</span>Living Room</div>
+                  <div class="ser-cat-product-cell ser-cat-status-cell">
+                    <span class="ser-cat-cell-label">Status:</span>
+                    <span class="ser-cat-status ser-cat-active">Active</span>
+                  </div>
+                  <div class="ser-cat-product-cell ser-cat-sales"><span class="ser-cat-cell-label">Sales:</span>41</div>
+                  <div class="ser-cat-product-cell ser-cat-stock"><span class="ser-cat-cell-label">Stock:</span>16</div>
+                  <div class="ser-cat-product-cell ser-cat-price"><span class="ser-cat-cell-label">Price:</span>$270</div>
+                </div>
+                <div class="ser-cat-products-row">
+                  <button class="ser-cat-cell-more-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                  </button>
+                    <div class="ser-cat-product-cell ser-cat-image">
+                      <img src="https://images.unsplash.com/photo-1560448204-603b3fc33ddc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Njd8fGludGVyaW9yfGVufDB8MHwwfHw%3D&auto=format&fit=crop&w=900&q=60" alt="product">
+                      <span>Sand</span>
+                    </div>
+                  <div class="ser-cat-product-cell ser-cat-category"><span class="ser-cat-cell-label">Category:</span>Living Room</div>
+                  <div class="ser-cat-product-cell ser-cat-status-cell">
+                    <span class="ser-cat-cell-label">Status:</span>
+                    <span class="ser-cat-status ser-cat-disabled">Disabled</span>
+                  </div>
+                  <div class="ser-cat-product-cell ser-cat-sales"><span class="ser-cat-cell-label">Sales:</span>52</div>
+                  <div class="ser-cat-product-cell ser-cat-stock"><span class="ser-cat-cell-label">Stock:</span>16</div>
+                  <div class="ser-cat-product-cell ser-cat-price"><span class="ser-cat-cell-label">Price:</span>$230</div>
+                </div>
+                <div class="ser-cat-products-row">
+                  <button class="ser-cat-cell-more-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                  </button>
+                    <div class="ser-cat-product-cell ser-cat-image">
+                      <img src="https://images.unsplash.com/photo-1533779283484-8ad4940aa3a8?ixid=MnwxMjA3fDB8MHxzZWFyY2h8ODd8fGludGVyaW9yfGVufDB8MHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="product">
+                      <span>Autumn</span>
+                    </div>
+                  <div class="ser-cat-product-cell ser-cat-category"><span class="ser-cat-cell-label">Category:</span>Decoration</div>
+                  <div class="ser-cat-product-cell ser-cat-status-cell">
+                    <span class="ser-cat-cell-label">Status:</span>
+                    <span class="ser-cat-status ser-cat-active">Active</span>
+                  </div>
+                  <div class="ser-cat-product-cell ser-cat-sales"><span class="ser-cat-cell-label">Sales:</span>21</div>
+                  <div class="ser-cat-product-cell ser-cat-stock"><span class="ser-cat-cell-label">Stock:</span>46</div>
+                  <div class="ser-cat-product-cell ser-cat-price"><span class="ser-cat-cell-label">Price:</span>$252</div>
+                </div>
+                <div class="ser-cat-products-row">
+                  <button class="ser-cat-cell-more-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                  </button>
+                    <div class="ser-cat-product-cell ser-cat-image">
+                      <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8aW50ZXJpb3J8ZW58MHwwfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="product">
+                      <span>Boheme</span>
+                    </div>
+                  <div class="ser-cat-product-cell ser-cat-category"><span class="ser-cat-cell-label">Category:</span>Furniture</div>
+                  <div class="ser-cat-product-cell ser-cat-status-cell">
+                    <span class="ser-cat-cell-label">Status:</span>
+                    <span class="ser-cat-status ser-cat-active">Active</span>
+                  </div>
+                  <div class="ser-cat-product-cell ser-cat-sales"><span class="ser-cat-cell-label">Sales:</span>32</div>
+                  <div class="ser-cat-product-cell ser-cat-stock"><span class="ser-cat-cell-label">Stock:</span>40</div>
+                  <div class="ser-cat-product-cell ser-cat-price"><span class="ser-cat-cell-label">Price:</span>$350</div>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+      
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    <div class="buy-now">
+      <a
+        href="#"
+        class="btn btn-danger btn-buy-now"
+        >Testing Version</a
+      >
+    </div>
+
+    <!-- Core JS -->
+
+    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
+
+    <script src="../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../assets/vendor/js/bootstrap.js"></script>
+
+    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+
+    <script src="../assets/vendor/js/menu.js"></script>
+
+    <!-- endbuild -->
+
+    <!-- Vendors JS -->
+    <script src="../assets/vendor/libs/apex-charts/apexcharts.js"></script>
+
+    <!-- Main JS -->
+
+    <script src="../assets/js/main.js"></script>
+
+    <!-- Page JS -->
+    <script src="../assets/js/dashboards-analytics.js"></script>
+
+    <!-- Place this tag before closing body tag for github widget button. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script src="../dist/css/style1.js"></script>
+    <script src="../dist/css/style2.js"></script>
+     <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const openButton = document.querySelector('.open-button');
+        const closeButton = document.getElementById('closeButton');
+        const modal = document.getElementById('menuModal');
+        const gameIcons = document.querySelectorAll('.game-icon');
+        const body = document.body;
+
+        // Open modal when the open button is clicked
+        openButton.addEventListener('click', function() {
+            modal.classList.add('active_open_menu');
+            body.classList.add('menu-open');
+
+            // Add animation delay to make it feel more polished
+            setTimeout(() => {
+                modal.style.transition = 'opacity 0.3s ease';
+            }, 500);
+        });
+      
+        // Close modal when the close button is clicked
+        closeButton.addEventListener('click', function() {
+            closeMenu();
+        });
+      
+        // Close modal when clicking outside the game container
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeMenu();
+            }
+        });
+      
+        // Function to close menu with animation
+        function closeMenu() {
+            // First slide out the container
+            const container = modal.querySelector('.game-container');
+            container.style.transform = 'translateX(100%)';
+
+            // Then fade out the overlay
+            setTimeout(() => {
+                modal.classList.remove('active_open_menu');
+                body.classList.remove('menu-open');
+
+                // Reset transform after animation completes
+                setTimeout(() => {
+                    container.style.transform = '';
+                }, 300);
+            }, 300);
+        }
+      
+        // Add click effect to game icons
+        gameIcons.forEach(icon => {
+            icon.addEventListener('click', function() {
+                // Remove active class from all icons
+                gameIcons.forEach(i => i.classList.remove('active_open_menu'));
+
+                // Add active class to clicked icon
+                this.classList.add('active_open_menu');
+
+                // Add a subtle press animation
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            });
+        });
+
+        // Add keyboard support (Escape key to close)
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('active_open_menu')) {
+                closeMenu();
+            }
+        });
+      });
+     </script>
+  </body>
+</html>
